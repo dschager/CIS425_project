@@ -4,6 +4,7 @@ CIS425
 19 February 2024
 Project 1
 */
+
 /* Iterative C program for merge sort */
 // Obtained from https://www.geeksforgeeks.org/iterative-merge-sort/
 
@@ -111,17 +112,19 @@ void printArray(int A[], int size)
 /* Driver program to test above functions */
 int main()
 {
+	//Creates a clock with start' and 'end' variables
 	clock_t start, end;
 	double cpu_time_used;
 	start = clock();
 
+	//n = size of array
 	int n = 10000;
-	int arr1[n];
-	int arr2[n];
-	int arr3[n];
-	int arr4[n];
-	int i;
+	
+	//4 declared arrays
+	int arr1[n], arr2[n], arr3[n], arr4[n];
 
+	//populates arrays with random integers 1-999
+	int i;
 	for (i=0; i< 10000; i++) {
 		arr1[i] = rand() % 1000;
 		arr2[i] = rand() % 1000;
@@ -129,12 +132,6 @@ int main()
 		arr4[i] = rand() % 1000;
 	}
 
-	/*
-	int n1 = sizeof(arr1)/sizeof(arr1[0]);
-	int n2 = sizeof(arr2)/sizeof(arr2[0]);
-	int n3 = sizeof(arr3)/sizeof(arr3[0]);
-	int n4 = sizeof(arr4)/sizeof(arr4[0]);
-	*/
 
 	mergeSort(arr1, n);
 	mergeSort(arr2, n);
@@ -144,7 +141,7 @@ int main()
 
 	end = clock();
 	cpu_time_used = ((double) (end-start)) / CLOCKS_PER_SEC;
-	printf("The program took %f seconds.\n", cpu_time_used);
+	printf("The threaded mergesort program took %f seconds.\n", cpu_time_used);
 	
 	return 0;
 }
