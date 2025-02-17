@@ -168,13 +168,6 @@ int main()
 		arr4[i] = rand() % 1000;
 	}
 
-	/*
-	int n1 = sizeof(arr1)/sizeof(arr1[0]);
-	int n2 = sizeof(arr2)/sizeof(arr2[0]);
-	int n3 = sizeof(arr3)/sizeof(arr3[0]);
-	int n4 = sizeof(arr4)/sizeof(arr4[0]);
-	*/
-
 	mergeSort(arr1, n);
 	mergeSort(arr2, n);
 	mergeSort(arr3, n);
