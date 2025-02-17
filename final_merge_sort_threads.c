@@ -3,6 +3,7 @@ Daniel Schager and Daniel Jackson
 CIS425
 19 February 2024
 Project 1
+Mergesort with Threads
 */
 
 /* Iterative C program for merge sort */
