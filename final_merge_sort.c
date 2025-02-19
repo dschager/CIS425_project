@@ -142,7 +142,7 @@ int main()
 
 	end = clock();
 	cpu_time_used = ((double) (end-start)) / CLOCKS_PER_SEC;
-	printf("The original mergesort program took %f seconds.\n", cpu_time_used);
+	printf("Original Mergesort took: %f seconds.\n", cpu_time_used);
 	
 	return 0;
 }
