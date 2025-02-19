@@ -19,7 +19,8 @@ void merge(int arr[], int l, int m, int r);
 
 int min(int x, int y) { return (x<y)? x :y; }
 
-//Creates a pointer to an array, along with left, mid, and right
+//Structure to pass parameters used in *mergeThread
+//Use arr as pointer
 typedef struct {
     int *arr;
     int left;
@@ -30,7 +31,7 @@ typedef struct {
 //runner function
 void *mergeThread(void *args) {
 	MergeParams *params = (MergeParams *) args;
-	
+	//merges given subarrays
 	merge(params->arr, params->left, params->mid, params->right);
 	free(params); //Frees the allocated memory for the MergeParams struct
 	return NULL;
@@ -44,7 +45,7 @@ void mergeSort(int arr[], int n)
 int curr_size; 
 int left_start; 
 
-int num_threads;
+int num_threads; 
 pthread_t threads[5]; //Declares up to 5 threads
 
 
@@ -59,8 +60,9 @@ for (curr_size=1; curr_size<=n-1; curr_size = 2*curr_size)
 
 		int right_end = min(left_start + 2*curr_size - 1, n-1);
 
-        //Stops creating threads after max exceeded
-        if (num_threads < 5) {
+       
+	//Tracks numbre of threads being used
+        if (num_threads < 5) {	 
             //Creates a structure to hold the same parameters as the original method
             MergeParams *params = (MergeParams *) malloc(sizeof(MergeParams));
             params->arr = arr;
@@ -72,13 +74,13 @@ for (curr_size=1; curr_size<=n-1; curr_size = 2*curr_size)
             pthread_create(&threads[num_threads], NULL, mergeThread, params);
             num_threads++;
         } else {
-			//for if threads are maxed out
+			//for if 5 threads are already running
 		    merge(arr, left_start, mid, right_end);
         }
 
 		
 	}
-	//loops and joins threads together
+	// waits for threads to complete, then joins them for 'merge'
     for (int i = 0; i < num_threads; i++) {
         pthread_join(threads[i], NULL);
     }
@@ -160,7 +162,7 @@ int main()
 	//4 declared arrays
 	int arr1[n], arr2[n], arr3[n], arr4[n];
 
-	//populates arrays with random integers 1-999
+	//populates 4 arrays (size n) with random integers 1-999
 	int i;
 	for (i=0; i< 10000; i++) {
 		arr1[i] = rand() % 1000;
@@ -176,8 +178,9 @@ int main()
 	printf("All arrays complete\n");
 
 	end = clock();
+	//calculates duration
 	cpu_time_used = ((double) (end-start)) / CLOCKS_PER_SEC;
-	printf("The threaded mergesort program took %f seconds.\n", cpu_time_used);
+	printf("Mergesort with threads took: %f seconds.\n", cpu_time_used);
 	
 	return 0;
 }
